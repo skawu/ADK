@@ -24,8 +24,9 @@ Each scenario should contain:
 - [Firmware safety boundary](scenarios/04-firmware-safety.md)
 - [Skill activation and project registry](scenarios/05-skill-activation-registry.md)
 - [Project policy precedence](scenarios/06-project-policy-precedence.md)
+- [CodeBuddy Skill activation](scenarios/07-codebuddy-activation.md)
 
-These scenarios are evaluation specifications, not evidence of successful execution. Record each run separately with the ADK version, harness/model configuration, observed behavior, evidence, and result.
+These scenarios are evaluation specifications, not evidence of successful execution. CodeBuddy has a dedicated fixture at `evals/fixtures/codebuddy-smoke/` for client-side activation verification. Record each run separately with the ADK version, harness/model configuration, observed behavior, evidence, and result.
 
 ## Promotion policy
 

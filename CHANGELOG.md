@@ -2,6 +2,14 @@
 
 This file records user-visible changes to ADK. Entries describe repository content, not assumed runtime behavior.
 
+## 0.1.0-alpha.6 — CodeBuddy adapter and activation smoke fixture
+
+- Added separate CodeBuddy IDE and CodeBuddy Code CLI layouts because their native rule-file formats differ.
+- Added native project Skill placement under .codebuddy/skills/ and client-specific rule mapping.
+- Kept project instructions, project settings, and custom registries untouched; installer manifests require runtime activation verification.
+- Added a CodeBuddy activation smoke fixture and evaluation scenario.
+- Structural tests cover the generated paths and metadata; actual activation in a running CodeBuddy client remains unverified.
+
 ## 0.1.0-alpha.5 — Safe selective installer
 
 - Added a standard-library installer that previews selected rules, Profiles, and Skills by default.
