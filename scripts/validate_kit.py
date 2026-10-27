@@ -20,6 +20,7 @@ REQUIRED_FILES = (
     "core/rules/evidence-and-delivery.md",
     "docs/architecture.md",
     "docs/adoption.md",
+    "docs/pilot-plan.md",
     "docs/skill-authoring.md",
     "adapters/README.md",
     "adapters/codex/README.md",

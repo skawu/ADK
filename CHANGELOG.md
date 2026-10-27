@@ -2,6 +2,13 @@
 
 This file records user-visible changes to ADK. Entries describe repository content, not assumed runtime behavior.
 
+## 0.1.0-alpha.4 — Project compatibility and pilot plan
+
+- Added a two-project pilot plan based on a read-only review of different instruction/activation and build/evidence models.
+- Clarified that ADK status vocabulary and hosted-CI practices must not override project-owned policy.
+- Added a manual evaluation scenario for project policy precedence and activation boundaries.
+- No consuming project was modified by this change.
+
 ## 0.1.0-alpha.3 — Technical Skills and adapter guidance
 
 - Added technology-specific Skills for Qt/QML, C++, Go, and embedded/MCU work.

@@ -45,6 +45,12 @@ At minimum, record:
 - branch, review, and release conventions;
 - unresolved assumptions and known verification gaps.
 
+## Pilot and integration boundaries
+
+Start with a read-only compatibility audit. Identify where ADK guidance matches, duplicates, conflicts with, or is not activated by the consuming project. Do not bulk-install ADK into a project simply because it is named as a pilot.
+
+Any project-side installation or adaptation must follow that project's own task ownership, branch/PR, security, and review rules. Keep project-specific product facts, private policies, registry schemas, release gates, and internal architecture details out of the reusable ADK source unless they have been explicitly approved for publication.
+
 ## Pilot exit criteria
 
 A pilot is not complete merely because files were copied. It should demonstrate that the AI can correctly identify project facts, load the intended guidance through the actual tool configuration, make a bounded change, run applicable checks, report unexecuted checks honestly, and avoid violating project-specific constraints. Record results in a repeatable evaluation scenario before promoting a lesson to a mandatory rule.
