@@ -50,7 +50,7 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 
 ## 本地校验
 
-使用 Python 标准库即可运行，不需要安装第三方包：
+需要 Python 3.10 或更高版本，不需要安装第三方包：
 
 - python -m unittest discover -s tests -v
 - python scripts/validate_kit.py

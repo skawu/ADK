@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.validate_kit import REQUIRED_FILES, validate_kit
+from scripts.validate_kit import REQUIRED_FILES, REQUIRED_SKILLS, validate_kit
 
 
 VALID_SKILL = """---
@@ -52,9 +52,11 @@ class ValidateKitTests(unittest.TestCase):
             path.write_text("placeholder\n", encoding="utf-8")
 
         (self.root / "VERSION").write_text("0.1.0-alpha.1\n", encoding="utf-8")
-        skill_dir = self.root / "skills" / "demo-skill"
-        skill_dir.mkdir(parents=True)
-        (skill_dir / "SKILL.md").write_text(VALID_SKILL, encoding="utf-8")
+        for skill_name in REQUIRED_SKILLS:
+            skill_dir = self.root / "skills" / skill_name
+            skill_dir.mkdir(parents=True)
+            content = VALID_SKILL.replace("name: demo-skill", f"name: {skill_name}")
+            (skill_dir / "SKILL.md").write_text(content, encoding="utf-8")
 
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
@@ -67,20 +69,33 @@ class ValidateKitTests(unittest.TestCase):
         errors = validate_kit(self.root)
         self.assertTrue(any("required file is missing: profiles/go.md" in error for error in errors))
 
-    def test_invalid_version_is_reported(self) -> None:
-        (self.root / "VERSION").write_text("next-version\n", encoding="utf-8")
+    def test_invalid_semver_is_reported(self) -> None:
+        for invalid_version in ("next-version", "01.1.0", "0.1.0-alpha..2"):
+            with self.subTest(version=invalid_version):
+                (self.root / "VERSION").write_text(invalid_version + "\n", encoding="utf-8")
+                errors = validate_kit(self.root)
+                self.assertTrue(any("VERSION is not valid semantic-version syntax" in error for error in errors))
+
+    def test_missing_required_skill_is_reported(self) -> None:
+        (self.root / "skills" / "architecture-docs" / "SKILL.md").unlink()
         errors = validate_kit(self.root)
-        self.assertTrue(any("VERSION is not valid semantic-version syntax" in error for error in errors))
+        self.assertTrue(any("required Skill is missing: skills/architecture-docs/SKILL.md" in error for error in errors))
 
     def test_skill_directory_and_frontmatter_name_must_match(self) -> None:
-        skill_file = self.root / "skills" / "demo-skill" / "SKILL.md"
-        skill_file.write_text(VALID_SKILL.replace("name: demo-skill", "name: other-skill"), encoding="utf-8")
+        skill_file = self.root / "skills" / "project-onboarding" / "SKILL.md"
+        skill_file.write_text(
+            VALID_SKILL.replace("name: demo-skill", "name: other-skill"),
+            encoding="utf-8",
+        )
         errors = validate_kit(self.root)
-        self.assertTrue(any("does not match directory 'demo-skill'" in error for error in errors))
+        self.assertTrue(any("does not match directory 'project-onboarding'" in error for error in errors))
 
     def test_missing_required_skill_section_is_reported(self) -> None:
-        skill_file = self.root / "skills" / "demo-skill" / "SKILL.md"
-        skill_file.write_text(VALID_SKILL.replace("## Failure handling\n\nTest failure handling.\n\n", ""), encoding="utf-8")
+        skill_file = self.root / "skills" / "project-onboarding" / "SKILL.md"
+        skill_file.write_text(
+            VALID_SKILL.replace("## Failure handling\n\nTest failure handling.\n\n", ""),
+            encoding="utf-8",
+        )
         errors = validate_kit(self.root)
         self.assertTrue(any("missing required section: Failure handling" in error for error in errors))
 

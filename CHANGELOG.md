@@ -4,7 +4,7 @@ This file records user-visible changes to ADK. Entries describe repository conte
 
 ## 0.1.0-alpha.2 — Structural validation and evaluation fixtures
 
-- Added a standard-library validation script for required files, Skill metadata/sections, version syntax, and local Markdown links.
+- Added a standard-library validator for required files, required core Skills, semantic-version syntax, Skill metadata/sections, and local Markdown links.
 - Added unit tests for valid structure and common validation failures.
 - Added GitHub Actions workflow to run unit tests and kit validation on pushes and pull requests.
 - Added initial manual evaluation scenarios for onboarding, scope control, verification honesty, and firmware safety.

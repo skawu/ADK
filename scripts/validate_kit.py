@@ -34,6 +34,17 @@ REQUIRED_FILES = (
     "evals/README.md",
 )
 
+REQUIRED_SKILLS = (
+    "project-onboarding",
+    "task-planning",
+    "implementation",
+    "debugging",
+    "build-test-verify",
+    "code-review",
+    "git-pr-lifecycle",
+    "architecture-docs",
+)
+
 REQUIRED_SKILL_SECTIONS = (
     "Purpose",
     "Use when",
@@ -42,8 +53,12 @@ REQUIRED_SKILL_SECTIONS = (
     "Failure handling",
     "Completion criteria",
 )
+
 VERSION_PATTERN = re.compile(
-    r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$"
+    r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
+    r"(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)"
+    r"(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?"
+    r"(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$"
 )
 SKILL_NAME_PATTERN = re.compile(r"^name:\s*([a-z0-9]+(?:-[a-z0-9]+)*)\s*$", re.MULTILINE)
 SKILL_DESCRIPTION_PATTERN = re.compile(r"^description:\s*(\S.*)$", re.MULTILINE)
@@ -87,6 +102,11 @@ def _validate_skills(root: Path, errors: list[str]) -> None:
     if not skill_dirs:
         errors.append("no Skill directories found under skills/")
         return
+
+    present_names = {path.name for path in skill_dirs}
+    for required_name in REQUIRED_SKILLS:
+        if required_name not in present_names:
+            errors.append(f"required Skill is missing: skills/{required_name}/SKILL.md")
 
     for skill_dir in skill_dirs:
         relative = skill_dir.relative_to(root).as_posix()
