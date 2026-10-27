@@ -107,7 +107,7 @@ class AdkInstallTests(unittest.TestCase):
         self.assertIn('description: "ADK reusable engineering rule: engineering-behavior"', rule)
         self.assertIn("alwaysApply: false", rule)
         self.assertIn("enabled: true", rule)
-        self.assertIn("project-specific facts take precedence", rule)
+        self.assertIn("Project-specific facts take precedence", rule)
         self.assertTrue(any("actual client" in warning for warning in warnings))
 
     def test_codebuddy_code_layout_uses_markdown_rule_files(self) -> None:
@@ -117,7 +117,7 @@ class AdkInstallTests(unittest.TestCase):
         rule = by_path[".codebuddy/rules/engineering-behavior.md"]
         self.assertIn("alwaysApply: false", rule)
         self.assertNotIn("enabled: true", rule)
-        self.assertIn("project-specific facts take precedence", rule)
+        self.assertIn("Project-specific facts take precedence", rule)
 
     def test_codebuddy_conflict_blocks_all_writes(self) -> None:
         existing = self.target / ".codebuddy/skills/qt-qml-development/SKILL.md"
