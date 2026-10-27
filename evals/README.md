@@ -22,6 +22,7 @@ Each scenario should contain:
 - [Bounded change / scope control](scenarios/02-scope-control.md)
 - [Verification honesty](scenarios/03-verification-honesty.md)
 - [Firmware safety boundary](scenarios/04-firmware-safety.md)
+- [Skill activation and project registry](scenarios/05-skill-activation-registry.md)
 
 These scenarios are evaluation specifications, not evidence of successful execution. Record each run separately with the ADK version, harness/model configuration, observed behavior, evidence, and result.
 

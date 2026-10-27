@@ -21,6 +21,8 @@ REQUIRED_FILES = (
     "docs/architecture.md",
     "docs/adoption.md",
     "docs/skill-authoring.md",
+    "adapters/README.md",
+    "adapters/codex/README.md",
     "profiles/qt-qml.md",
     "profiles/cpp-cmake.md",
     "profiles/go.md",
@@ -43,6 +45,10 @@ REQUIRED_SKILLS = (
     "code-review",
     "git-pr-lifecycle",
     "architecture-docs",
+    "qt-qml-development",
+    "cpp-development",
+    "go-development",
+    "embedded-firmware",
 )
 
 REQUIRED_SKILL_SECTIONS = (
@@ -74,8 +80,7 @@ def _read_text(path: Path) -> str:
 
 def _validate_required_files(root: Path, errors: list[str]) -> None:
     for relative in REQUIRED_FILES:
-        path = root / relative
-        if not path.is_file():
+        if not (root / relative).is_file():
             errors.append(f"required file is missing: {relative}")
 
 
@@ -103,9 +108,7 @@ def _validate_skills(root: Path, errors: list[str]) -> None:
         errors.append("no Skill directories found under skills/")
         return
 
-    present_names = {
-        path.name for path in skill_dirs if (path / "SKILL.md").is_file()
-    }
+    present_names = {path.name for path in skill_dirs if (path / "SKILL.md").is_file()}
     for required_name in REQUIRED_SKILLS:
         if required_name not in present_names:
             errors.append(f"required Skill is missing: skills/{required_name}/SKILL.md")

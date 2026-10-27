@@ -16,14 +16,15 @@ After implementation, after a defect fix, before a meaningful delivery, or when 
 ## Procedure
 
 1. Read the project's build/test matrix and existing CI or developer instructions.
-2. Select checks that cover the changed behavior, affected interfaces, and regression risks.
+2. Select the cheapest set of checks that can honestly prove the changed behavior, affected interfaces, and material regression risks. Scale cost and environment strength with the claim and change risk.
 3. Confirm prerequisites, target configuration, environment, and whether the command may mutate or erase data.
 4. Execute checks in a useful order: focused test, relevant module build, broader tests, static analysis, integration or target validation as appropriate.
-5. Capture exact commands or test identifiers, exit status, relevant output, and environment details.
+5. Capture exact commands or test identifiers, exit status, relevant output, environment details, and the commit/artifact identity when the claim depends on a specific version.
 6. For each check, record PASS, FAIL, BLOCKED, NOT RUN, or NOT APPLICABLE using the definitions in core/rules/evidence-and-delivery.md.
-7. Investigate failures sufficiently to distinguish a product defect from an environment or test-infrastructure issue.
-8. Do not weaken tests, suppress warnings, or change unrelated code just to obtain a green result.
-9. Report what the evidence proves and what it does not prove.
+7. Verify that each important check has a clear oracle and that the recorded result applies to the stated subject.
+8. Investigate failures sufficiently to distinguish a product defect from an environment or test-infrastructure issue.
+9. Do not weaken tests, suppress warnings, or change unrelated code just to obtain a green result.
+10. Report what the evidence proves, what it does not prove, and which changes would invalidate the result.
 
 ## Target-aware verification
 
@@ -31,7 +32,7 @@ For cross-platform and embedded projects, report host build, cross-compile, simu
 
 ## Outputs
 
-A verification table with commands, statuses, evidence, and explicit gaps.
+A verification table with property, subject/commit, command or observation, oracle, status, evidence, and explicit gaps.
 
 ## Failure handling
 
@@ -39,4 +40,4 @@ If a check fails, preserve the relevant output and determine whether the failure
 
 ## Completion criteria
 
-All required checks have a truthful recorded status, failures are addressed or surfaced, and remaining verification gaps are visible.
+All required checks have a truthful recorded status, evidence applies to the identified subject, failures are addressed or surfaced, and remaining verification gaps are visible.
