@@ -2,7 +2,7 @@
 
 ## Status
 
-Manual mapping guidance. This directory does not contain an installer and does not claim end-to-end activation has been tested in every Codex version.
+Manual mapping guidance. The installer can copy selected Skills into a Codex-style target layout, but end-to-end activation is not automatically verified for every Codex version.
 
 ## Source and target layout
 
@@ -20,12 +20,20 @@ Typical repository target when supported by the selected Codex version:
 
 Verify the exact supported paths and precedence against the target tool version before installation. Do not assume a folder named rules is automatically loaded.
 
-## Manual setup
+## Preview an installation
+
+From a checkout of ADK, run the installer with the target repository path and selected components. Without the apply flag, it prints a plan only. For example:
+
+python scripts/adk_install.py --target ../your-project --layout codex --skill qt-qml-development --skill build-test-verify --profile qt-qml --rule engineering-behavior
+
+After reviewing the plan, add --apply to copy files. Existing differing files cause a conflict and block the operation.
+
+## Manual setup and activation
 
 1. Inspect existing AGENTS.md and all nested instruction files.
 2. Select only relevant ADK rules, Profiles, and Skills.
 3. Copy selected Skills into the tool-supported Skill directory without overwriting existing Skills.
-4. Link the project AGENTS.md to the selected rule/Profile documents and relevant Skills.
+4. Link the project AGENTS.md to selected rule/Profile documents and relevant Skills through a separate, reviewed project change.
 5. If a project-owned registry controls activation, update it through the project's own schema and review process.
 6. Test activation with a bounded task: ask the tool to identify the active instruction/Skill and demonstrate the expected workflow.
 7. Record the installed ADK version and local changes in the project profile.

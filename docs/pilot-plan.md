@@ -24,7 +24,7 @@ The source projects' private or product-specific instructions are not copied int
 - Project-specific build commands and test routes must remain authoritative.
 - Test scope should follow risk and the property being claimed, not a universal “run everything” rule.
 - Evidence needs an oracle and a clear relationship to the tested commit/artifact and environment.
-- A generic status vocabulary must not override a consuming project's required status terms.
+- A generic status vocabulary must not override project-owned status terms.
 - CI access, evidence collection, and release/merge gates must follow the project's policy.
 - Project-specific product architecture and internal governance must not be promoted to universal ADK rules.
 
@@ -78,6 +78,7 @@ The pilot is ready to expand when:
 
 - Read-only repository inventory: complete for initial planning.
 - Structural ADK CI: passing on the latest merged baseline.
+- Safe selective installer: implemented in the ADK branch; consuming-project use remains unverified until this change is merged and reviewed.
 - Actual Skill activation in consuming tools: not yet verified.
 - Project-side installation PRs: not started.
 - Behavioral pilot scenarios: defined, not executed.

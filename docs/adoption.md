@@ -18,18 +18,24 @@ Apply only the relevant parts of ADK to an existing repository without overwriti
 10. **Pilot with bounded tasks.** Use representative bug fixes, feature changes, and reviews. Record misses and false positives.
 11. **Upgrade deliberately.** Compare the new ADK version with the installed files, inspect the diff, and preserve local modifications.
 
-## Installation policy
+## Selective installer
 
-The first version is intentionally documentation-first. Do not assume a universal installer or automatic merge strategy exists. Until a tested installer is available, copy selected files manually and review every change.
+The standard-library installer scripts/adk_install.py supports explicit selection of Skills, Profiles, and rules. It is a conservative copy tool, not a complete project integration system.
 
-An installer, when implemented, must:
-- detect existing files and local edits;
-- support dry-run and explicit file selection;
-- avoid destructive overwrites by default;
-- identify the ADK version installed in the target project;
-- report added, updated, skipped, and conflicting files;
-- update any required activation registry only through a project-specific adapter;
-- provide a rollback or recovery path.
+Preview a plan (no writes):
+
+python scripts/adk_install.py --target ../your-project --layout codex --skill qt-qml-development --profile qt-qml --rule engineering-behavior
+
+Apply only after reviewing the plan by adding --apply. The tool:
+- requires the target directory to exist;
+- refuses to install into the ADK source tree or its parent/child paths;
+- never overwrites differing existing files;
+- treats identical files as unchanged;
+- blocks all writes when any conflict is found;
+- does not edit AGENTS.md, tool configuration, or a project-owned registry;
+- records the ADK version, selected components, and manual activation status in a manifest.
+
+A project with a custom registry still needs a separate project-owned registry change if its activation process requires one. Verify actual Skill activation in the target tool.
 
 ## Project profile requirements
 

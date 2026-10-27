@@ -39,17 +39,7 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 
 ## 状态与版本
 
-当前处于 v0.1 初始基线建设阶段。已有核心规则、技术 Profiles、模板、通用与技术专用 Skills、结构校验脚本和 CI。行为评估场景已定义，但尚不能视为已执行或通过。版本信息见 VERSION 与 CHANGELOG.md。
-
-## 建设原则
-
-- 通用规则与项目事实分离。
-- 强制规则与按需技能分离。
-- 文件存在与工具实际激活分离。
-- 要求与验证证据分离。
-- 尽可能自动检查可机器判定的要求。
-- 优先使用最小、可审查、可回滚的变更。
-- 保留清晰的变更记录和版本兼容说明。
+当前处于 v0.1 初始基线建设阶段。已有核心规则、技术 Profiles、模板、通用与技术专用 Skills、结构校验脚本、选择性安装工具和 CI。行为评估场景已定义，但尚不能视为已执行或通过。版本信息见 VERSION 与 CHANGELOG.md。
 
 ## 本地校验
 
@@ -58,4 +48,10 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 - python -m unittest discover -s tests -v
 - python scripts/validate_kit.py
 
-CI 在 Pull Request 和推送时执行相同的检查。
+## 选择性安装
+
+默认只预览，不修改目标项目。先用 dry-run 查看计划：
+
+- python scripts/adk_install.py --target ../your-project --layout codex --skill qt-qml-development --profile qt-qml --rule engineering-behavior
+
+确认计划后，显式追加 --apply 才会复制文件。工具不会修改目标项目的 AGENTS.md 或自定义注册表；复制后仍需按目标工具与项目规则验证 Skill 是否真正激活。
