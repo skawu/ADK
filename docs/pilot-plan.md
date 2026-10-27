@@ -78,7 +78,7 @@ The pilot is ready to expand when:
 
 - Read-only repository inventory: complete for initial planning.
 - Structural ADK CI: passing on the latest merged baseline.
-- Safe selective installer: implemented in the ADK branch; consuming-project use remains unverified until this change is merged and reviewed.
+- Safe selective installer: merged in ADK; actual installation into consuming projects remains unverified.
 - Actual Skill activation in consuming tools: not yet verified.
 - Project-side installation PRs: not started.
 - Behavioral pilot scenarios: defined, not executed.
