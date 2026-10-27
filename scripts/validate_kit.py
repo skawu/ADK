@@ -103,7 +103,9 @@ def _validate_skills(root: Path, errors: list[str]) -> None:
         errors.append("no Skill directories found under skills/")
         return
 
-    present_names = {path.name for path in skill_dirs}
+    present_names = {
+        path.name for path in skill_dirs if (path / "SKILL.md").is_file()
+    }
     for required_name in REQUIRED_SKILLS:
         if required_name not in present_names:
             errors.append(f"required Skill is missing: skills/{required_name}/SKILL.md")
