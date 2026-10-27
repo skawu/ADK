@@ -6,6 +6,7 @@
 - Do not overwrite or discard uncommitted work that is not clearly part of the task.
 - Keep changes reviewable and logically grouped. Avoid unrelated formatting or generated-file churn.
 - Follow the repository's established branch, commit, pull request, review, and merge policies. If none exist, propose a simple policy rather than silently imposing one across all projects.
+- Respect project-specific restrictions on querying hosted CI, Actions, checks, or external services. Do not assume that an available connector or visible endpoint is authorized for every repository.
 - Never force-push, rewrite shared history, bypass required review, or alter protected branches unless explicitly authorized by the applicable policy and task.
 - Do not commit generated binaries, secrets, local environment files, or build outputs unless the repository explicitly requires them.
 - For dependency changes, explain the reason, compatibility impact, licensing implications when relevant, and reproducibility effect.

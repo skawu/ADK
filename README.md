@@ -28,6 +28,7 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 
 - [架构与职责边界](docs/architecture.md)
 - [项目接入与升级](docs/adoption.md)
+- [双项目试点计划](docs/pilot-plan.md)
 - [Skill 编写规范](docs/skill-authoring.md)
 - [适配器与工具接入](adapters/README.md)
 - [核心规则](core/rules/)
