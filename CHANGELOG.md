@@ -2,6 +2,14 @@
 
 This file records user-visible changes to ADK. Entries describe repository content, not assumed runtime behavior.
 
+## 0.1.0-alpha.5 — Safe selective installer
+
+- Added a standard-library installer that previews selected rules, Profiles, and Skills by default.
+- Added explicit apply mode, conflict detection, idempotent handling of identical files, and rollback of newly created files on write failure.
+- The installer never overwrites existing files and does not modify AGENTS.md or project-owned registries.
+- Added installer unit tests and extended kit validation to require the installer and its tests.
+- Actual installation and Skill activation in consuming projects remain unverified.
+
 ## 0.1.0-alpha.4 — Project compatibility and pilot plan
 
 - Added a two-project pilot plan based on a read-only review of different instruction/activation and build/evidence models.

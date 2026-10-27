@@ -6,8 +6,10 @@ Adapters describe how to map ADK source content into an AI coding tool and an ex
 
 ## Current status
 
-- [Codex-style repository layout](codex/README.md): manual mapping guidance only.
-- Automated installation, upgrade, merge, and rollback are not implemented.
+- [Codex-style repository layout](codex/README.md): manual mapping guidance.
+- A safe selective-copy installer is available at scripts/adk_install.py. Dry-run is the default.
+- The installer does not modify AGENTS.md or project-owned registries and does not prove that copied Skills are active.
+- Automated upgrade/merge of conflicting files and end-to-end activation testing in every tool are not implemented.
 - Other coding environments require their own documented and tested adapter before being described as supported.
 
 ## Source-to-target mapping
@@ -28,6 +30,14 @@ Some repositories maintain a registry or manifest that tracks Skill/rule status,
 4. update the registry only through an explicit project-specific change;
 5. verify activation in the actual tool rather than inferring it from file presence.
 
-## Installer requirements
+## Installer behavior
 
-Any future installer must support dry-run, selected components, conflict detection, preservation of local edits, version tracking, an explicit update plan, and a recovery path. It must not overwrite AGENTS.md or project registries by default.
+- Without --apply, the installer only prints the proposed file plan.
+- With --apply, it creates selected files only when destinations do not exist.
+- Identical existing files are treated as unchanged; differing files are conflicts.
+- Any conflict blocks the entire operation before writes begin.
+- If a write fails after application starts, newly created files are removed on a best-effort basis.
+- AGENTS.md, tool configuration, and project registries are never modified.
+- Replacing or upgrading an existing ADK manifest is not supported yet; review conflicts manually.
+
+The installer is intentionally conservative. It optimizes for preserving existing project state, not for silently completing all activation steps.

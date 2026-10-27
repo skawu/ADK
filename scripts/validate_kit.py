@@ -35,6 +35,10 @@ REQUIRED_FILES = (
     "templates/ADR.md",
     "templates/CHANGE_REPORT.md",
     "evals/README.md",
+    "scripts/validate_kit.py",
+    "scripts/adk_install.py",
+    "tests/test_adk_install.py",
+    "tests/test_validate_kit.py",
 )
 
 REQUIRED_SKILLS = (
