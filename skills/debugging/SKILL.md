@@ -33,6 +33,10 @@ Use safe bench, simulator, or captured-data methods where possible. Do not flash
 
 Reproduction steps, evidence, root cause or unresolved hypotheses, fix summary, regression evidence, and remaining uncertainty.
 
+## Failure handling
+
+If the failure cannot be reproduced or evidence is insufficient to distinguish hypotheses, do not claim a root cause. Report what was observed, which hypotheses remain, and the safest next diagnostic experiment.
+
 ## Completion criteria
 
 The reported defect is reproduced and corrected with relevant regression evidence, or the inability to prove the cause is explicitly documented.

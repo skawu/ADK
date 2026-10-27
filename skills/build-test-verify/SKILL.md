@@ -33,6 +33,10 @@ For cross-platform and embedded projects, report host build, cross-compile, simu
 
 A verification table with commands, statuses, evidence, and explicit gaps.
 
+## Failure handling
+
+If a check fails, preserve the relevant output and determine whether the failure is caused by the change, environment, or test infrastructure. If a required check is blocked, record the prerequisite and do not replace it with an unrelated check. Escalate only when a decision or access change is required.
+
 ## Completion criteria
 
 All required checks have a truthful recorded status, failures are addressed or surfaced, and remaining verification gaps are visible.

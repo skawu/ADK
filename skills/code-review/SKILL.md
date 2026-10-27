@@ -30,6 +30,14 @@ Reviewing a diff, pull request, substantial implementation, protocol/API change,
 
 For each finding include severity, location, triggering condition, impact, and a concrete remediation. Avoid vague style comments unless the project has an explicit rule.
 
+## Outputs
+
+A review report containing prioritized findings, evidence, and the review scope. If no actionable finding is identified, state that result and list any checks or environments not reviewed.
+
+## Failure handling
+
+If the diff, task criteria, relevant source, or claimed test evidence is unavailable, identify the missing evidence and limit the review conclusion accordingly. Do not approve or declare the change defect-free based on an incomplete view.
+
 ## Completion criteria
 
 The review has inspected the complete relevant diff and produced actionable findings or a scoped no-findings report with validation gaps.
