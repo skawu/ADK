@@ -46,7 +46,7 @@ Choose the exact client rather than treating all CodeBuddy products as having id
 
 Both place selected Skills under `.codebuddy/skills/`. Their native rule formats differ. Existing `AGENTS.md`, `CODEBUDDY.md`, `.codebuddy/settings.json`, and project-owned registries are preserved. If a project has a custom registry, reconcile the new Skill with that registry through the project's own reviewed workflow; do not assume the native directory supersedes it.
 
-Use the activation smoke scenario in `evals/scenarios/07-codebuddy-activation.md`. A successful dry-run, copied file, or passing ADK CI is not proof that a running CodeBuddy client has loaded or invoked the Skill.
+Use the activation smoke scenario in `../evals/scenarios/07-codebuddy-activation.md`. A successful dry-run, copied file, or passing ADK CI is not proof that a running CodeBuddy client has loaded or invoked the Skill.
 
 ## Project profile requirements
 

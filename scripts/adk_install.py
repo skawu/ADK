@@ -114,7 +114,7 @@ def build_plan(
     skills: list[str],
     profiles: list[str],
     rules: list[str],
-) -> tuple[list[InstallItem], list[str]]
+) -> tuple[list[InstallItem], list[str]]:
     """Build a deterministic copy plan without modifying the target."""
     source_root = source_root.resolve()
     target_root = target_root.resolve()

@@ -119,6 +119,17 @@ class AdkInstallTests(unittest.TestCase):
         self.assertNotIn("enabled: true", rule)
         self.assertIn("project-specific facts take precedence", rule)
 
+    def test_codebuddy_conflict_blocks_all_writes(self) -> None:
+        existing = self.target / ".codebuddy/skills/qt-qml-development/SKILL.md"
+        existing.parent.mkdir(parents=True)
+        existing.write_text("client-owned skill\n", encoding="utf-8")
+        items, _ = self.make_plan(layout="codebuddy")
+        with self.assertRaises(InstallError):
+            apply_plan(self.target, items)
+        self.assertEqual("client-owned skill\n", existing.read_text(encoding="utf-8"))
+        self.assertFalse((self.target / "docs/ai-dev/profiles/qt-qml.md").exists())
+        self.assertFalse((self.target / "docs/ai-dev/ADK-MANIFEST.json").exists())
+
     def test_codebuddy_layout_preserves_instruction_files_and_project_registry(self) -> None:
         (self.target / "CODEBUDDY.md").write_text("client-owned instructions\n", encoding="utf-8")
         items, warnings = self.make_plan(layout="codebuddy")
