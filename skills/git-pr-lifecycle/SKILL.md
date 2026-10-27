@@ -33,6 +33,10 @@ Never force-push or rewrite shared history unless explicitly authorized and perm
 
 Branch and commit references, PR link and state, check results, review disposition, and any remaining follow-up.
 
+## Failure handling
+
+If a branch update, push, PR operation, check, or merge fails, inspect the resulting repository state before retrying. Do not repeat a potentially mutating operation blindly. Report the blocker and the safest next step.
+
 ## Completion criteria
 
 The authorized repository workflow has reached its required terminal state, or the exact blocker and next action are recorded.

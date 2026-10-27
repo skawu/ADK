@@ -33,6 +33,10 @@ Do not silently alter public APIs, persistent formats, protocol contracts, depen
 
 A reviewable change, appropriate tests/documentation, and an evidence-based change report.
 
+## Failure handling
+
+If implementation reveals a conflicting contract, missing prerequisite, unsafe assumption, or requirement that cannot be met within the authorized scope, stop the affected change, preserve the current state, and report evidence plus options. Do not hide a partial implementation behind a success claim.
+
 ## Completion criteria
 
 The implementation satisfies the agreed criteria or its remaining gaps are clearly reported with status and evidence.

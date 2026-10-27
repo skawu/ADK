@@ -29,6 +29,10 @@ A task changes module boundaries, interfaces, deployment topology, data flow, co
 
 An updated architecture document or ADR with scope, context, decision, alternatives, consequences, verification approach, and open issues as applicable.
 
+## Failure handling
+
+If requirements, implementation evidence, or decision ownership is unclear, separate confirmed facts from proposals and open questions. Do not present a proposed architecture as an accepted decision.
+
 ## Completion criteria
 
 The document accurately distinguishes current facts from proposed design and leaves no material ambiguity about the decision being recorded.
