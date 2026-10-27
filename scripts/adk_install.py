@@ -196,13 +196,22 @@ def apply_plan(target_root: Path, items: list[InstallItem]) -> list[str]:
                 continue
             destination = _safe_destination(target_root, item.relative_path)
             destination.parent.mkdir(parents=True, exist_ok=True)
+            opened = False
             try:
                 with destination.open("xb") as stream:
+                    opened = True
                     stream.write(item.content.encode("utf-8"))
             except FileExistsError as exc:
                 raise InstallError(
                     f"destination appeared during install; refusing to overwrite: {item.relative_path}"
                 ) from exc
+            except Exception:
+                if opened:
+                    try:
+                        destination.unlink(missing_ok=True)
+                    except OSError:
+                        pass
+                raise
             created.append(destination)
     except Exception:
         for path in reversed(created):
