@@ -2,6 +2,14 @@
 
 This file records user-visible changes to ADK. Entries describe repository content, not assumed runtime behavior.
 
+## 0.1.0-alpha.3 — Technical Skills and adapter guidance
+
+- Added technology-specific Skills for Qt/QML, C++, Go, and embedded/MCU work.
+- Clarified that copying a Skill file does not prove that the target tool or project registry activates it.
+- Added manual adapter guidance for a Codex-style project layout and custom project registries.
+- Strengthened evidence requirements with explicit oracle, artifact/environment identity, invalidation, and risk-proportional verification.
+- Extended structural validation to require adapter documentation and all core/technical Skills.
+
 ## 0.1.0-alpha.2 — Structural validation and evaluation fixtures
 
 - Added a standard-library validator for required files, required core Skills, semantic-version syntax, Skill metadata/sections, and local Markdown links.

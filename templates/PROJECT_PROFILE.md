@@ -30,6 +30,16 @@
 - Host platforms:
 - Target platforms/hardware:
 
+## Agent/tool integration
+
+- Primary AI coding tool(s):
+- Active instruction entry point(s):
+- Skill source directory:
+- Skill target directory:
+- Project-owned registry/manifest:
+- Rule activation mechanism:
+- Known tool-specific limitations:
+
 ## Verification
 
 - Unit tests:

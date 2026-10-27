@@ -10,7 +10,29 @@ Use these meanings consistently:
 - **NOT RUN** — the check was not attempted. Do not use this to disguise a known failure.
 - **NOT APPLICABLE** — the check does not apply to the changed behavior; explain why when non-obvious.
 
-A successful build is not proof that behavior is correct. A host test is not proof of target-hardware behavior. A test that was not run is not a pass.
+A successful build is not proof that behavior is correct. A host test is not proof of target-hardware behavior. A green CI status is not evidence for checks that did not execute. A test that was not run is not a pass.
+
+## Evidence contract
+
+For each material claim or acceptance check, identify:
+
+- **Property:** the behavior or product promise being evaluated.
+- **Subject:** the commit/artifact, configuration, toolchain, platform, and target environment to which the result applies.
+- **Action:** the test, command, inspection, or observation actually performed.
+- **Oracle:** the observable condition that determines PASS or FAIL.
+- **Result:** the status and relevant output.
+- **Invalidation:** changes that make retained evidence no longer applicable, such as a new commit, toolchain, configuration, target, or material interface change.
+
+Do not treat a screenshot, log, benchmark value, registered test, or workflow definition as self-interpreting evidence. The result must be tied to the relevant subject and an explicit oracle. Exact commit or artifact identity is required whenever the claim depends on a specific version.
+
+## Risk-proportional verification
+
+- Choose the cheapest evidence that can honestly prove the changed property.
+- Scale test scope and cost with the change's risk and affected contracts.
+- A documentation-only change does not automatically require full hardware qualification; a deployment or ABI change may require stronger environment-specific evidence even when the code diff is small.
+- Avoid redundant tests that prove the same property at the same layer without additional value.
+- Never substitute cheaper evidence when the product claim requires a stronger environment, integration path, or physical observation.
+- Zero discovered or executed tests are not evidence of a passing test suite.
 
 ## Required delivery report
 

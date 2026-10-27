@@ -12,7 +12,7 @@ The root AGENTS.md guides work in this repository. core/AGENTS.base.md is a sour
 
 ### Skills
 
-A Skill describes a repeatable workflow with explicit triggers, steps, outputs, and failure handling. Skills should be loaded when relevant, not copied wholesale into every prompt. The repository source location is skills/<skill-name>/SKILL.md. An adapter may install these into the target tool's supported skill directory, such as .agents/skills, after verifying the target tool's conventions.
+A Skill describes a repeatable workflow with explicit triggers, steps, outputs, and failure handling. Skills should be loaded when relevant, not copied wholesale into every prompt. The repository source location is skills/<skill-name>/SKILL.md. An adapter may install these into the target tool's supported skill directory after verifying that tool's conventions.
 
 ### Technical Profiles
 
@@ -20,11 +20,21 @@ Profiles provide technology-specific checks and constraints. They are not univer
 
 ### Project layer
 
-The consuming repository owns its product requirements, architecture, interface contracts, build commands, test matrix, safety case, release policy, and decisions. ADK must not invent these facts. The project layer may add stricter rules or explicitly document justified exceptions.
+The consuming repository owns its product requirements, architecture, interface contracts, build commands, test matrix, safety case, release policy, activation registry, and decisions. ADK must not invent these facts. The project layer may add stricter rules or explicitly document justified exceptions.
 
-### Adapters and validation
+### Adapters and activation
 
-Adapters translate the source kit into the conventions of a particular coding environment. Validation checks file structure and metadata; evaluations test whether an AI follows the guidance in representative tasks. These are distinct: a structurally valid kit is not proof that it improves engineering outcomes.
+Adapters translate source content into a coding environment's supported conventions. A file existing in ADK, or being copied into a project, does not prove that a tool loads it. The adapter must distinguish:
+- source location in ADK;
+- target location expected by the selected tool;
+- project-specific registry or activation mechanism, if any;
+- rules that must be referenced by the project's active instruction entry point.
+
+Some projects use a machine-readable registry to track Skill/rule status, ownership, triggers, or replacement relationships. Such a registry belongs to that project; ADK does not define a universal registry schema. Do not overwrite it or assume a new Skill is active until the project's activation path is understood.
+
+### Validation and evaluation
+
+Validation checks file structure and metadata; evaluations test whether an AI follows the guidance in representative tasks. These are distinct: a structurally valid kit is not proof that it improves engineering outcomes.
 
 ## 3. Authority and conflict resolution
 
@@ -32,7 +42,7 @@ Use this order when reconciling guidance:
 
 1. Applicable law, organizational security policy, and explicit user authorization boundaries.
 2. Confirmed project requirements, architecture decisions, interface contracts, and safety constraints.
-3. Relevant project-level instructions and tool-specific constraints.
+3. Relevant project-level instructions, activation registries, and tool-specific constraints.
 4. ADK core rules and selected technical Profiles.
 5. Skill defaults and AI-generated assumptions.
 
@@ -44,6 +54,7 @@ A lower layer cannot silently override a higher one. If a material conflict prev
 - **Skill:** a conditional workflow used for a class of tasks.
 - **Profile:** technology-specific knowledge and checks selected by a project.
 - **Template:** a starting point that must be filled with project facts.
+- **Adapter:** a mapping to a specific tool or project activation mechanism.
 - **Script/check:** a deterministic test for a machine-verifiable property.
 - **Evaluation scenario:** a controlled case used to test behavior, not merely file syntax.
 
