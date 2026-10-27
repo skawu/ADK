@@ -7,10 +7,12 @@ Adapters describe how to map ADK source content into an AI coding tool and an ex
 ## Current status
 
 - [Codex-style repository layout](codex/README.md): manual mapping guidance.
+- [CodeBuddy IDE / Code CLI](codebuddy/README.md): native Skill layouts and client-specific rule formats.
 - A safe selective-copy installer is available at scripts/adk_install.py. Dry-run is the default.
 - The installer does not modify AGENTS.md or project-owned registries and does not prove that copied Skills are active.
 - Automated upgrade/merge of conflicting files and end-to-end activation testing in every tool are not implemented.
 - Other coding environments require their own documented and tested adapter before being described as supported.
+- CodeBuddy adapter paths and static file formats are covered by tests; actual runtime discovery/invocation must still be confirmed in the installed client.
 
 ## Source-to-target mapping
 

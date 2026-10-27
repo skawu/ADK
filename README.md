@@ -31,6 +31,7 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 - [双项目试点计划](docs/pilot-plan.md)
 - [Skill 编写规范](docs/skill-authoring.md)
 - [适配器与工具接入](adapters/README.md)
+- [CodeBuddy IDE / Code CLI 适配](adapters/codebuddy/README.md)
 - [核心规则](core/rules/)
 - [技术 Profiles](profiles/)
 - [可复用模板](templates/)
@@ -52,6 +53,6 @@ ADK 是一套面向真实软件工程的、可复用的 AI 开发规范与技能
 
 默认只预览，不修改目标项目。先用 dry-run 查看计划：
 
-- python scripts/adk_install.py --target ../your-project --layout codex --skill qt-qml-development --profile qt-qml --rule engineering-behavior
+- python scripts/adk_install.py --target ../your-project --layout codebuddy --skill qt-qml-development --profile qt-qml --rule engineering-behavior
 
-确认计划后，显式追加 --apply 才会复制文件。工具不会修改目标项目的 AGENTS.md 或自定义注册表；复制后仍需按目标工具与项目规则验证 Skill 是否真正激活。
+确认计划后，显式追加 --apply 才会复制文件。CodeBuddy IDE 使用 `--layout codebuddy`，CodeBuddy Code CLI 使用 `--layout codebuddy-code`。工具不会修改目标项目的 AGENTS.md、CODEBUDDY.md、工具设置或自定义注册表；复制后仍需在实际客户端验证 Skill 是否被发现并触发。

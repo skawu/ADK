@@ -19,7 +19,7 @@ class AdkInstallTests(unittest.TestCase):
         self.source.mkdir()
         self.target.mkdir()
 
-        (self.source / "VERSION").write_text("0.1.0-alpha.5\n", encoding="utf-8")
+        (self.source / "VERSION").write_text("0.1.0-alpha.6\n", encoding="utf-8")
         skill = self.source / "skills" / "qt-qml-development" / "SKILL.md"
         skill.parent.mkdir(parents=True)
         skill.write_text("skill source\n", encoding="utf-8")
@@ -98,6 +98,39 @@ class AdkInstallTests(unittest.TestCase):
         statuses = [status for _, status in classify_plan(self.target, second_items)]
         self.assertTrue(all(status == "UNCHANGED" for status in statuses))
         self.assertEqual([], apply_plan(self.target, second_items))
+
+    def test_codebuddy_ide_layout_uses_native_skill_and_rule_paths(self) -> None:
+        items, warnings = self.make_plan(layout="codebuddy")
+        by_path = {item.relative_path: item.content for item in items}
+        self.assertIn(".codebuddy/skills/qt-qml-development/SKILL.md", by_path)
+        rule = by_path[".codebuddy/rules/engineering-behavior/RULE.mdc"]
+        self.assertIn('description: "ADK reusable engineering rule: engineering-behavior"', rule)
+        self.assertIn("alwaysApply: false", rule)
+        self.assertIn("enabled: true", rule)
+        self.assertIn("project-specific facts take precedence", rule)
+        self.assertTrue(any("actual client" in warning for warning in warnings))
+
+    def test_codebuddy_code_layout_uses_markdown_rule_files(self) -> None:
+        items, _ = self.make_plan(layout="codebuddy-code")
+        by_path = {item.relative_path: item.content for item in items}
+        self.assertIn(".codebuddy/skills/qt-qml-development/SKILL.md", by_path)
+        rule = by_path[".codebuddy/rules/engineering-behavior.md"]
+        self.assertIn("alwaysApply: false", rule)
+        self.assertNotIn("enabled: true", rule)
+        self.assertIn("project-specific facts take precedence", rule)
+
+    def test_codebuddy_layout_preserves_instruction_files_and_project_registry(self) -> None:
+        (self.target / "CODEBUDDY.md").write_text("client-owned instructions\n", encoding="utf-8")
+        items, warnings = self.make_plan(layout="codebuddy")
+        apply_plan(self.target, items)
+        self.assertEqual("project-owned instructions\n", (self.target / "AGENTS.md").read_text(encoding="utf-8"))
+        self.assertEqual("client-owned instructions\n", (self.target / "CODEBUDDY.md").read_text(encoding="utf-8"))
+        self.assertEqual('{"project":"owned"}\n', (self.target / ".agents/registry.json").read_text(encoding="utf-8"))
+        manifest = json.loads((self.target / "docs/ai-dev/ADK-MANIFEST.json").read_text(encoding="utf-8"))
+        self.assertEqual(["AGENTS.md", "CODEBUDDY.md"], manifest["project_instruction_files_detected"])
+        self.assertTrue(manifest["project_registry_detected"])
+        self.assertFalse(manifest["project_registry_modified"])
+        self.assertTrue(any("CODEBUDDY.md" in warning for warning in warnings))
 
     def test_target_inside_source_tree_is_rejected(self) -> None:
         nested_target = self.source / "consumer"
